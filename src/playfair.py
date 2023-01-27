@@ -33,5 +33,12 @@ def freq_count(ciphertext, seq_len = 1):
     return freq
 
 print(freq_count(ct))
+print("----------------------------")
+#print(freq_count(ct, 2))
+key =  {"BL":"th", "SH":"in", "CH":"an", "FT":"er", "UG":"re"}
+write_file(0, substitute(ct, key))
+print("new key")
+#key.update({"LR":"on", "ZD":"ti", "KB":"at"})
+ct = substitute(ct, key)
 print(freq_count(ct, 2))
-write_file(0, substitute(ct, {"BL":"th", "SH":"he", "CH":"er"}))
+write_file(1, substitute(ct, key))
