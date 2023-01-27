@@ -20,17 +20,18 @@ def substitute(ciphertext, dictionary):
             plaintext += c
     return plaintext
 
-def freq_count(ciphertext, seq_len = 2):
+def freq_count(ciphertext, seq_len = 1):
+    unit_size = 2
     freq = {}
-    for i in range(0, len(ciphertext)-seq_len+1):
-        key = ciphertext[i:i+seq_len]
+    for i in range(0, len(ciphertext)-seq_len+1, unit_size):
+        key = ciphertext[i:i+unit_size*seq_len]
         if key in freq:
             freq[key] += 1
         else:
             freq[key] = 1
-    freq = dict(sorted(freq.items(), key=lambda x: x[1], reverse=True)[:30])
+    freq = dict(sorted(freq.items(), key=lambda x: x[1], reverse=True)[:50])
     return freq
 
 print(freq_count(ct))
-
-write_file(0, substitute(ct, {"BL":"th", "SH":"he"}))
+print(freq_count(ct, 2))
+write_file(0, substitute(ct, {"BL":"th", "SH":"he", "CH":"er"}))
