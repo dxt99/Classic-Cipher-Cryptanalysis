@@ -29,16 +29,23 @@ def freq_count(ciphertext, seq_len = 1):
             freq[key] += 1
         else:
             freq[key] = 1
-    freq = dict(sorted(freq.items(), key=lambda x: x[1], reverse=True)[:50])
+    freq = (sorted(freq.items(), key=lambda x: x[1], reverse=True)[:50])
     return freq
-
+print(len(ct))
 print(freq_count(ct))
-print("----------------------------")
-#print(freq_count(ct, 2))
-key =  {"BL":"th", "SH":"in", "CH":"an", "FT":"er", "UG":"re"}
-write_file(0, substitute(ct, key))
-print("new key")
-#key.update({"LR":"on", "ZD":"ti", "KB":"at"})
-ct = substitute(ct, key)
 print(freq_count(ct, 2))
-write_file(1, substitute(ct, key))
+print("----------------------------")
+freq = (freq_count(ct))
+
+f = open("data/english_bigrams.txt", "r")
+data = f.readlines()
+f.close()
+
+key = {}
+for i in range(20):
+    line = data[i].strip().split()
+    key[freq[i][0]] = line[0].lower()
+
+print(key)
+
+write_file(0, substitute(ct, key))
